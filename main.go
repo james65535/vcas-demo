@@ -9,6 +9,13 @@ import (
 var server string
 
 func init() {
+	// Configure Wavefront proxy address
+	if os.Getenv("WF_PROXY") != "" {
+		server = os.Getenv("WF_PROXY")
+	} else {
+		log.Println("No Wavefront Proxy Address Specified")
+	}
+	// Configure webserver listening address
 	if os.Getenv("SERVER") != "" {
 		server = os.Getenv("SERVER")
 	} else {
@@ -18,7 +25,7 @@ func init() {
 
 //localhost:8080/?name=bob
 func greeter(w http.ResponseWriter, r *http.Request) {
-	log.Println("setUser visitor:" + r.RemoteAddr)
+	log.Println("/ visited by:" + r.RemoteAddr)
 	name := r.URL.Query().Get("name")
 	log.Println("Name:", name)
 	message := "Hello " + name
