@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vcas-demo-svc
+spec:
+  selector:
+    app: vcas-demo-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vcas-demo-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vcas-demo-app
+  template:
+    metadata:
+      labels:
+        app: vcas-demo-app
+    spec:
+      containers:
+      - name: vcas-demo
+        image: james65535/vcas-demo:v8
+        ports:
+        - containerPort: 8080
+        env:
+        - name: WF_PROXY
+          value: "wavefront-proxy:2878"
+        imagePullPolicy: Always
