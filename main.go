@@ -1,26 +1,25 @@
 package main
 
 import (
+	"fmt"
+	"github.com/rcrowley/go-metrics"
+	"github.com/wavefronthq/go-metrics-wavefront"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"regexp"
+	"time"
 )
 
-var server string
+var wfProxy string
 
 func init() {
 	// Configure Wavefront proxy address
 	if os.Getenv("WF_PROXY") != "" {
-		server = os.Getenv("WF_PROXY")
+		wfProxy = os.Getenv("WF_PROXY")
 	} else {
 		log.Println("No Wavefront Proxy Address Specified")
-	}
-	// Configure webserver listening address
-	if os.Getenv("SERVER") != "" {
-		server = os.Getenv("SERVER")
-	} else {
-		log.Panic("No Server Address Specified")
 	}
 }
 
@@ -33,8 +32,13 @@ func sValidation(u string) bool {
 	return false
 }
 
+type Server struct {
+	greetC metrics.Counter
+}
+
 //localhost:8080/?name=bob
-func greeter(w http.ResponseWriter, r *http.Request) {
+func (s *Server)greeter(w http.ResponseWriter, r *http.Request) {
+	s.greetC.Inc(1)
 	var name string
 	if sValidation(r.URL.Query().Get("name")) {
 		name = r.URL.Query().Get("name")
@@ -48,9 +52,19 @@ func greeter(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Printf("Starting on %s\n", server)
-	http.HandleFunc("/", greeter)
-	if err := http.ListenAndServe(server, nil); err != nil {
+	server := Server{metrics.NewCounter()}
+	hostTags := map[string]string{
+		"source": "j-go-metrics-test",
+	}
+	wavefront.RegisterMetric("requests", server.greetC, hostTags)
+	wfAddr, err := net.ResolveTCPAddr("tcp", wfProxy)
+	if err != nil {
+		fmt.Println("wf proxy resolve address error:", err)
+	}
+	go wavefront.WavefrontProxy(metrics.DefaultRegistry, 1*time.Minute, hostTags, "some.prefix", wfAddr)
+	log.Printf("Starting server.")
+	http.HandleFunc("/", server.greeter)
+	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}
 }
