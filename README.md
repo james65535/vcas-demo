@@ -1,1 +1,1 @@
-# Demo App for WaveFront and VMware Cloud Automation Service
+# Demo App for VMware Wavefront and Cloud Automation Service
