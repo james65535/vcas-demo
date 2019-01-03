@@ -51,7 +51,23 @@ func (s *Server)greeter(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(message))
 }
 
+// Temporary route to try clarity and react
+func (s *Server)test(w http.ResponseWriter, r *http.Request) {
+	file := "public/test/index.html"
+	log.Println("Test File:", file)
+	http.ServeFile(w, r, file)
+}
+
+// Route to serve javascript
+func (s *Server)js(w http.ResponseWriter, r *http.Request) {
+	file := "public/test/js/" + r.URL.Path[len("/test/js/"):]
+	log.Println("JS File:", file)
+	w.Header().Set("Content-Type", "application/javascript")
+	http.ServeFile(w, r, file)
+}
+
 func main() {
+	//wavefront setup
 	server := Server{metrics.NewCounter()}
 	hostTags := map[string]string{
 		"source": "j-go-metrics-test",
@@ -62,8 +78,13 @@ func main() {
 		fmt.Println("wf proxy resolve address error:", err)
 	}
 	go wavefront.WavefrontProxy(metrics.DefaultRegistry, 1*time.Minute, hostTags, "some.prefix", wfAddr)
+
+	// Webserver setup
 	log.Printf("Starting server.")
 	http.HandleFunc("/", server.greeter)
+	http.HandleFunc("/test/", server.test)
+	// http.HandleFunc("/api/v1/abc", server.abc) // TODO setup REST API for state transfer
+	http.HandleFunc("/test/js/", server.js)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}
