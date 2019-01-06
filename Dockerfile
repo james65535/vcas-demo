@@ -1,6 +1,5 @@
 FROM golang:1.10 AS build-env
 COPY cmd /go/src/app/cmd
-COPY pkg /go/src/app/pkg
 WORKDIR /go/src/app
 #RUN go install -i
 RUN set -x && \
