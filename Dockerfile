@@ -8,8 +8,8 @@ RUN set -x && \
 RUN CGO_ENABLED=0 GOOS=linux go build -a -o main /go/src/app/cmd/main.go
 
 FROM scratch
-#WORKDIR /app
+# WORKDIR /app
 COPY --from=build-env /go/src/app/main main
 COPY public public
-CMD ["/app/main"]
+CMD ["/main"]
 EXPOSE 8080
