@@ -9,7 +9,7 @@ class Clock extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://vcas-demo-svc.james-dev-cluster-652d201c-a5ce-11e8-a2d3-025c1bdf5282.93a9beeb-d761-4551-bdba-e1f8b99fb995.vke-user.com/api/v1/users")
+        fetch("https://swapi.co/api/people/1/")
             .then(res => res.json())
             .then(
                 (result) => {
