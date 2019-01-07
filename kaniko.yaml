@@ -1,34 +1,40 @@
-apiVersion: v1
-kind: Pod
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: kaniko
+  name: kaniko-job
 spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
-    args: ["--dockerfile=/workspace/Dockerfile",
-           "--context=/workspace",
-           "--destination=james65535/vcas-demo:v20"]
-    volumeMounts:
+  completions: 1
+  template:
+    metadata:
+      name: kaniko-job
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: git-pull-init
+          image: alpine/git:latest
+          args: ["clone","https://github.com/james65535/vcas-demo.git","/workspace"]
+          volumeMounts:
+            - name: workspace-vol
+              mountPath: /workspace
+      containers:
+      - name: kaniko
+        image: gcr.io/kaniko-project/executor:latest
+        args: ["--dockerfile=/workspace/Dockerfile",
+               "--context=/workspace",
+               "--destination=james65535/vcas-demo:v22"]
+        volumeMounts:
+          - name: workspace-vol
+            mountPath: /workspace
+          - name:  registry-creds
+            mountPath: /root/
+      volumes:
+      - name: registry-creds
+        projected:
+          sources:
+          - secret:
+              name: docker-secret
+              items:
+              - key: .dockerconfigjson
+                path: .docker/config.json
       - name: workspace-vol
-        mountPath: /workspace
-      - name:  registry-creds
-        mountPath: /root/
-  initContainers:
-  - name: git-pull-init
-    image: alpine/git:latest
-    args: ["clone","https://github.com/james65535/vcas-demo.git","/workspace"]
-    volumeMounts:
-    - name: workspace-vol
-      mountPath: /workspace
-  volumes:
-  - name: registry-creds
-    projected:
-      sources:
-      - secret:
-          name: docker-secret
-          items:
-          - key: .dockerconfigjson
-            path: .docker/config.json
-  - name: workspace-vol
-    emptyDir: {}
+        emptyDir: {}
