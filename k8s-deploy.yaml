@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: vcas-demo
-        image: james65535/vcas-demo:v22
+        image: james65535/vcas-demo:v23
         ports:
         - containerPort: 8080
         env:
