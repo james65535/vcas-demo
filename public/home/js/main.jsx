@@ -13,12 +13,12 @@ class Clock extends React.Component {
                         <a _ngcontent-c0="" className="nav-link" href="/home" routerlinkactive="active"
                            ng-reflect-router-link="/home" ng-reflect-router-link-active="active"><span _ngcontent-c0=""
                                                                                                        className="nav-text">Home</span></a>
+                        <a _ngcontent-c0="" className="nav-link" href="/users" routerlinkactive="active"
+                           ng-reflect-router-link="/users" ng-reflect-router-link-active="active"><span _ngcontent-c0=""
+                                                                                                       className="nav-text">Users</span></a>
                         <a _ngcontent-c0="" className="nav-link" href="/about" routerlinkactive="active"
                            ng-reflect-router-link="/about" ng-reflect-router-link-active="active"><span _ngcontent-c0=""
                                                                                                         className="nav-text">About</span></a>
-                        <a _ngcontent-c0="" className="nav-link" href="/test" routerlinkactive="active"
-                           ng-reflect-router-link="/test" ng-reflect-router-link-active="active"><span _ngcontent-c0=""
-                                                                                                       className="nav-text">Test</span></a>
                     </div>
                     <div _ngcontent-c0="" className="header-actions">
                     </div>

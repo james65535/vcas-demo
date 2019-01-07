@@ -70,15 +70,29 @@ func (s *Server)healthz(w http.ResponseWriter, r *http.Request) {
 }
 
 // Temporary route to try clarity and react
-func (s *Server)test(w http.ResponseWriter, r *http.Request) {
-	file := "public/test/index.html"
-	log.Println("Test File:", file)
+func (s *Server)home(w http.ResponseWriter, r *http.Request) {
+	file := "public/home/index.html"
+	log.Println("Home File:", file)
 	http.ServeFile(w, r, file)
 }
 
 // Route to serve javascript
-func (s *Server)js(w http.ResponseWriter, r *http.Request) {
-	file := "public/test/js/" + r.URL.Path[len("/test/js/"):]
+func (s *Server)homejs(w http.ResponseWriter, r *http.Request) {
+	file := "public/home/js/" + r.URL.Path[len("/js/"):]
+	log.Println("JS File:", file)
+	w.Header().Set("Content-Type", "application/javascript")
+	http.ServeFile(w, r, file)
+}
+
+func (s *Server)users(w http.ResponseWriter, r *http.Request) {
+	file := "public/users/index.html"
+	log.Println("Users File:", file)
+	http.ServeFile(w, r, file)
+}
+
+// Route to serve javascript
+func (s *Server)usersjs(w http.ResponseWriter, r *http.Request) {
+	file := "public/users/js/" + r.URL.Path[len("/users/js/"):]
 	log.Println("JS File:", file)
 	w.Header().Set("Content-Type", "application/javascript")
 	http.ServeFile(w, r, file)
@@ -142,12 +156,13 @@ func main() {
 
 	// Webserver setup
 	log.Printf("Starting server.")
-	http.HandleFunc("/", server.greeter)
+	//http.HandleFunc("/", server.greeter) // TODO old remove
+	http.HandleFunc("/", server.home)
+	http.HandleFunc("/js/", server.homejs)
 	http.HandleFunc("/healthz", server.healthz)
-	http.HandleFunc("/test/", server.test)
 	http.HandleFunc("/api/v1/users/", server.testSQL)
-	// http.HandleFunc("/api/v1/abc", server.abc) // TODO setup REST API for state transfer
-	http.HandleFunc("/test/js/", server.js)
+	http.HandleFunc("/users", server.users)
+	http.HandleFunc("/users/js/", server.usersjs)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}
