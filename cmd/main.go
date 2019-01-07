@@ -1,7 +1,10 @@
 package main
 
 import (
+	"database/sql"
+	"encoding/json"
 	"fmt"
+	_ "github.com/lib/pq"
 	"github.com/rcrowley/go-metrics"
 	"github.com/wavefronthq/go-metrics-wavefront"
 	"log"
@@ -13,6 +16,18 @@ import (
 )
 
 var wfProxy string
+
+type Server struct {
+	greetC metrics.Counter
+	db *sql.DB
+}
+
+type User struct {
+	Uid int
+	Name string
+}
+
+var server Server
 
 func init() {
 	// Configure Wavefront proxy address
@@ -30,10 +45,6 @@ func sValidation(u string) bool {
 		return true
 	}
 	return false
-}
-
-type Server struct {
-	greetC metrics.Counter
 }
 
 //localhost:8080/?name=bob
@@ -73,9 +84,32 @@ func (s *Server)js(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, file)
 }
 
+func (s *Server)testSQL(w http.ResponseWriter, r *http.Request) {
+	rows, err := s.db.Query(`SELECT * FROM webusers`)
+	if err != nil {
+		fmt.Println("PSQL Error:", err)
+	}
+	var users []User
+	for rows.Next() {
+		var uid int
+		var username string
+		err = rows.Scan(&uid, &username)
+		user := User{uid, username}
+		users = append(users, user)
+	}
+
+	response, err := json.MarshalIndent(users, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	w.Header().Set("Content-Type","application/json")
+	// w.Header().Set("Access-Control-Allow-Origin", "*") // TODO may need for CORS
+	w.Write(response)
+}
+
 func main() {
 	//wavefront setup
-	server := Server{metrics.NewCounter()}
+	server := Server{metrics.NewCounter(), nil}
 	hostTags := map[string]string{
 		"source": "j-go-metrics-test",
 	}
@@ -86,11 +120,32 @@ func main() {
 	}
 	go wavefront.WavefrontProxy(metrics.DefaultRegistry, 1*time.Minute, hostTags, "some.prefix", wfAddr)
 
+	// Connect to PSQL Database
+	// TODO for server struct
+	/*
+	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/golang_todo_dev")
+	if err != nil {
+		log.Fatal(err)
+	}
+	db.SetMaxIdleConns(100)
+	defer db.Close()
+
+     server := &Server{db: db}
+	 */
+	connStr := "postgres://postgres:mysecretpassword@postgres:5432/webapp?sslmode=disable"
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+	server.db = db
+
 	// Webserver setup
 	log.Printf("Starting server.")
 	http.HandleFunc("/", server.greeter)
 	http.HandleFunc("/healthz", server.healthz)
 	http.HandleFunc("/test/", server.test)
+	http.HandleFunc("/api/v1/users/", server.testSQL)
 	// http.HandleFunc("/api/v1/abc", server.abc) // TODO setup REST API for state transfer
 	http.HandleFunc("/test/js/", server.js)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
