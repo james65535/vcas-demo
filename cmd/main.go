@@ -51,6 +51,13 @@ func (s *Server)greeter(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(message))
 }
 
+func (s *Server)healthz(w http.ResponseWriter, r *http.Request) {
+	s.greetC.Inc(1)
+	log.Println("/healthz visited by:" + r.RemoteAddr)
+	message := "Health: OK"
+	w.Write([]byte(message))
+}
+
 // Temporary route to try clarity and react
 func (s *Server)test(w http.ResponseWriter, r *http.Request) {
 	file := "public/test/index.html"
@@ -82,6 +89,7 @@ func main() {
 	// Webserver setup
 	log.Printf("Starting server.")
 	http.HandleFunc("/", server.greeter)
+	http.HandleFunc("/healthz", server.healthz)
 	http.HandleFunc("/test/", server.test)
 	// http.HandleFunc("/api/v1/abc", server.abc) // TODO setup REST API for state transfer
 	http.HandleFunc("/test/js/", server.js)
