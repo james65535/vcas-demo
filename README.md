@@ -5,4 +5,4 @@ Small webapp to demonstrate:
 * VMware Wavefront
 
 
-test 1
+test 2

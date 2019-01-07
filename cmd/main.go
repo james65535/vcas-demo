@@ -117,7 +117,7 @@ func (s *Server)testSQL(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	w.Header().Set("Content-Type","application/json")
-	// w.Header().Set("Access-Control-Allow-Origin", "*") // TODO may need for CORS
+	w.Header().Set("Access-Control-Allow-Origin", "*") // TODO may need for CORS
 	w.Write(response)
 }
 
@@ -135,17 +135,6 @@ func main() {
 	go wavefront.WavefrontProxy(metrics.DefaultRegistry, 1*time.Minute, hostTags, "some.prefix", wfAddr)
 
 	// Connect to PSQL Database
-	// TODO for server struct
-	/*
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/golang_todo_dev")
-	if err != nil {
-		log.Fatal(err)
-	}
-	db.SetMaxIdleConns(100)
-	defer db.Close()
-
-     server := &Server{db: db}
-	 */
 	connStr := "postgres://postgres:mysecretpassword@postgres:5432/webapp?sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
