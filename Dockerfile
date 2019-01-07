@@ -11,5 +11,5 @@ FROM scratch
 #WORKDIR /app
 COPY --from=build-env /go/src/app/main /app/main
 COPY public /app/public
-CMD["/app/main"]
+CMD ["/app/main"]
 EXPOSE 8080
