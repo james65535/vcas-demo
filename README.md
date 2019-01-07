@@ -1,2 +1,5 @@
-# Demo App for VMware Wavefront and Cloud Automation Service
-Temp Text for Page 2
+# VMware CAS Demo App
+Small webapp to demonstrate:
+* VMware Cloud Automation Service
+* VMware Cloud PKS
+* VMware Wavefront
