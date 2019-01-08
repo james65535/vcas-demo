@@ -6,6 +6,7 @@ class Clock extends React.Component {
             isLoaded: false,
             items: []
         };
+        this.state=this.state.bind(this);
     }
 
     componentDidMount() {
