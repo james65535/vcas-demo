@@ -64,11 +64,13 @@ class Clock extends React.Component {
                     </header>
                     <div className="content-container">
                         <div className="content-area">
-                            <div>
-                                <ul>
-                                    {this.state.items.map(item => <li key={item.id}>{item.body}</li>)}
-                                </ul>
-                            </div>
+                            <ul>
+                                {items.map(item => (
+                                    <li key={item.name}>
+                                        {item.name} {item.height}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
