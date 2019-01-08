@@ -9,7 +9,7 @@ class Clock extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://swapi.co/api/people/1/")
+        fetch("https://jsonplaceholder.typicode.com/todos/1")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -67,7 +67,7 @@ class Clock extends React.Component {
                             <ul>
                                 {items.map(item => (
                                     <li key={item.name}>
-                                        {item.name} {item.height}
+                                        {item.id} {item.title}
                                     </li>
                                 ))}
                             </ul>
