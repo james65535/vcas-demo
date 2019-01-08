@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 class Clock extends React.Component {
     constructor(props) {
         super(props);
@@ -6,7 +9,6 @@ class Clock extends React.Component {
             isLoaded: false,
             items: []
         };
-        this.state=this.state.bind(this);
     }
 
     componentDidMount() {
