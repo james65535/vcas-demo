@@ -26,7 +26,7 @@ class Clock extends React.Component {
                 <div className="content-container">
                     <div className="content-area">
                         <div>
-                            <h1>Hello, world!</h1>
+                            <h1>Hello, everyone</h1>
                             <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
                         </div>
                     </div>
