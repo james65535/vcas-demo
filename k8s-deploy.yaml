@@ -30,7 +30,7 @@ spec:
       containers:
       - name: vcas-demo
         image: james65535/vcas-demo:v24
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
