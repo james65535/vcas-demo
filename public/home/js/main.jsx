@@ -28,6 +28,7 @@ class Clock extends React.Component {
                         <div>
                             <h1>Hello test</h1>
                             <br />
+                            {navigator.userAgent}
                             <img src="https://bit.ly/2TwXMMn" />
                             <br />
                             <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
@@ -45,5 +46,6 @@ function tick() {
         document.getElementById('root')
     );
 }
+
 
 setInterval(tick, 1000);
