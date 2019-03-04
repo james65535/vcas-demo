@@ -30,9 +30,9 @@ spec:
       containers:
       - name: vcas-demo
         image: james65535/vcas-demo:v24
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         env:
         - name: WF_PROXY
           value: "wavefront-proxy:2878"
-        imagePullPolicy: Always
