@@ -27,6 +27,8 @@ class Clock extends React.Component {
                     <div className="content-area">
                         <div>
                             <h1>Hello test</h1>
+                            <br>
+                            <img src="https://bit.ly/2TwXMMn"></img>
                             <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
                         </div>
                     </div>
