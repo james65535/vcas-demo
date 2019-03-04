@@ -135,6 +135,7 @@ func main() {
 	go wavefront.WavefrontProxy(metrics.DefaultRegistry, 1*time.Minute, hostTags, "some.prefix", wfAddr)
 
 	// Connect to PSQL Database
+	/*
 	connStr := "postgres://postgres:mysecretpassword@postgres:5432/webapp?sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
@@ -142,6 +143,7 @@ func main() {
 	}
 	defer db.Close()
 	server.db = db
+	*/
 
 	// Webserver setup
 	log.Printf("Starting server.")
