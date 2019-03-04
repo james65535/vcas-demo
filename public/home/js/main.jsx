@@ -28,8 +28,11 @@ class Clock extends React.Component {
                         <div>
                             <h1>Hello test</h1>
                             <br />
-                            {navigator}
+                            UserAgent: {navigator.userAgent}
                             <br />
+                            Geo: {navigator.geolocation}
+                            <br />
+                            Geo: {navigator.platform}
                             <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
                         </div>
                     </div>
