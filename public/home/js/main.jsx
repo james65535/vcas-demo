@@ -54,6 +54,14 @@ class Clock extends React.Component {
                                                         <td>{navigator.product}</td>
                                                     </tr>
                                                     <tr>
+                                                        <th>Browser Name</th>
+                                                        <td>{navigator.appName}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Browser Version</th>
+                                                        <td>{navigator.appVersion}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <th>Geo</th>
                                                         <td>{navigator.geolocation.getCurrentPosition.toString()}</td>
                                                     </tr>
