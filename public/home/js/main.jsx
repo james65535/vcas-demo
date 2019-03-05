@@ -25,7 +25,7 @@ class Clock extends React.Component {
                 </header>
                 <div className="content-container">
                     <div className="content-area">
-                        <div class="row">
+                        <div class="clr-row">
                             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <div class="card-img">
                                     <img src="https://uz.wikipedia.org/wiki/Apple_Inc.#/media/File:Apple_logo_black.svg" alt="..." />
@@ -36,7 +36,9 @@ class Clock extends React.Component {
                                     </p>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="clr-row">
                             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <div class="card-img">
                                     <img src="https://uz.wikipedia.org/wiki/Apple_Inc.#/media/File:Apple_logo_black.svg" alt="..." />
@@ -52,7 +54,8 @@ class Clock extends React.Component {
                                     <br />
                                     Product: {navigator.product}
                                     <br />
-                                    Vendor: {navigator.vendor}                                    </p>
+                                    Vendor: {navigator.vendor}  
+                                    </p>
                                 </div>
                             </div>
 
