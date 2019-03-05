@@ -39,13 +39,22 @@ class Clock extends React.Component {
                                     </div>
                                     <div class="card-block">
                                         <p class="card-text">
-                                            Platform: {navigator.platform}
-                                            <br />
-                                            UserAgent: {navigator.userAgent}
-                                            <br />
-                                            Product: {navigator.product}
-                                            <br />
-                                            Vendor: {navigator.vendor}
+                                            <table class="table table-vertical">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Platform</th>
+                                                        <td>.{navigator.platform}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Browser Vendor</th>    
+                                                        <td>{navigator.vendor}</td> 
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Browser Type</th>
+                                                        <td>{navigator.product}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </p>
                                     </div>
                                 </a>
