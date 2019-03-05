@@ -29,10 +29,10 @@ class Clock extends React.Component {
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <a href="..." class="card clickable">
                                     <div class="card-img">
-                                        <table width="250px">
+                                        <table width="500px">
                                          <tr>
                                              <td>
-                                                 <img src="/images/apple.png"/>
+                                                 <img src={getPlatformImage}/>
                                              </td>
                                          </tr>
                                         </table>
@@ -42,8 +42,6 @@ class Clock extends React.Component {
                                             Platform: {navigator.platform}
                                             <br />
                                             UserAgent: {navigator.userAgent}
-                                            <br />
-                                            Platform: {navigator.platform}
                                             <br />
                                             Product: {navigator.product}
                                             <br />
@@ -65,6 +63,22 @@ function tick() {
         <Clock date={new Date()} />,
         document.getElementById('root')
     );
+}
+
+function getPlatformImage() {
+    var $img
+    switch(navigator.platform) {
+        case "MacIntel":
+            $img = "/images/apple.png"
+            break;
+        case "Win32":
+            $img = "/images/windows.png"
+            break;
+       default:
+            $img = "/images/unicorn.png"
+       break;
+    }
+    return $img
 }
 
 
