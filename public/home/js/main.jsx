@@ -25,26 +25,16 @@ class Clock extends React.Component {
                 </header>
                 <div className="content-container">
                     <div className="content-area">
-                        <div class="clr-row">
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <div class="card-img">
-                                    <img src="https://uz.wikipedia.org/wiki/Apple_Inc.#/media/File:Apple_logo_black.svg" alt="..." />
-                                </div>
-                                <div class="card-block">
-                                    <p class="card-text">
-                                        Platform: {navigator.platform}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="clr-row">
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <a href="..." class="card clickable">
                                 <div class="card-img">
-                                    <img src="https://uz.wikipedia.org/wiki/Apple_Inc.#/media/File:Apple_logo_black.svg" alt="..." />
+                                    <img src="/images/apple.png">
                                 </div>
                                 <div class="card-block">
                                     <p class="card-text">
+                                    Platform: {navigator.platform}
                                     <br />
                                     UserAgent: {navigator.userAgent}
                                     <br />
@@ -57,10 +47,8 @@ class Clock extends React.Component {
                                     Vendor: {navigator.vendor}  
                                     </p>
                                 </div>
-                            </div>
-
+                            </a>
                         </div>
-
                     </div>
                 </div>
             </div>
