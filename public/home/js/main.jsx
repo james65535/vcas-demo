@@ -72,6 +72,7 @@ function tick() {
         <Clock date={new Date()} />,
         document.getElementById('root')
     );
+    
     getPlatformImage()
 }
 
