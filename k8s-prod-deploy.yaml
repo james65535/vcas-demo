@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vcas-demo-dep
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vcas-demo-app
+  template:
+    metadata:
+      labels:
+        app: vcas-demo-app
+    spec:
+      containers:
+      - name: vcas-demo
+        image: james65535/vcas-demo:v24
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: WF_PROXY
+          value: "wavefront-proxy:2878"
