@@ -32,7 +32,8 @@ class Clock extends React.Component {
                                         <table width="500px">
                                          <tr>
                                              <td>
-                                                 <img src={getPlatformImage}/>
+                                                {getPlatformImage}
+                                                 <img id="platformimage" src="" />
                                              </td>
                                          </tr>
                                         </table>
@@ -43,7 +44,7 @@ class Clock extends React.Component {
                                                 <tbody>
                                                     <tr>
                                                         <th>Platform</th>
-                                                        <td>.{navigator.platform}</td>
+                                                        <td>{navigator.platform}</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Browser Vendor</th>    
@@ -75,19 +76,18 @@ function tick() {
 }
 
 function getPlatformImage() {
-    var $img
+    var $img = document.getElementById("platformimage")
     switch(navigator.platform) {
         case "MacIntel":
-            $img = "/images/apple.png"
+            $img.src = "/images/apple.png"
             break;
         case "Win32":
-            $img = "/images/windows.png"
+            $img.src = "/images/windows.png"
             break;
        default:
-            $img = "/images/unicorn.png"
+            $img.src = "/images/unicorn.png"
        break;
     }
-    return $img
 }
 
 
