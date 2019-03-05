@@ -101,12 +101,11 @@ function getPlatformImage() {
     if (document.body.clientWidth > 300 ){
         $img.style.width = "250px"
         $img.style.height = "250px"
-    } else
-    {
+    } else {
         $img.style.width = "100px"
         $img.style.height = "100px"
     }
-    
+
     $img.align = "middle"    
 }
 
