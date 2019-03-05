@@ -30,7 +30,7 @@ class Clock extends React.Component {
                                 <a href="..." class="card clickable">
                                     <div class="card-img">
                                         
-                                        <img src="/images/apple.png" width="250px" height="250px"/>
+                                        <img src="/images/apple.png" width="250" height="250"/>
                                     </div>
                                     <div class="card-block">
                                         <p class="card-text">
