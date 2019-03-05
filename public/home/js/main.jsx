@@ -32,8 +32,7 @@ class Clock extends React.Component {
                                         <table width="500px">
                                          <tr>
                                              <td>
-                                                {getPlatformImage}
-                                                 <img id="platformimage" src="" />
+                                                 <img id="platformimage" src="/images/unicorn.png" />
                                              </td>
                                          </tr>
                                         </table>
@@ -73,6 +72,7 @@ function tick() {
         <Clock date={new Date()} />,
         document.getElementById('root')
     );
+    getPlatformImage()
 }
 
 function getPlatformImage() {
