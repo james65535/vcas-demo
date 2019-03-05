@@ -83,6 +83,13 @@ func (s *Server)homejs(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/javascript")
 	http.ServeFile(w, r, file)
 }
+// Route to serve images
+func (s *Server)images(w http.ResponseWriter, r *http.Request) {
+	file := "public/home/images/" + r.URL.Path[len("/images/"):]
+	log.Println("Image File:", file)
+	w.Header().Set("Content-Type", "image/png")
+	http.ServeFile(w, r, file)
+}
 
 func (s *Server)users(w http.ResponseWriter, r *http.Request) {
 	file := "public/users/index.html"
@@ -150,6 +157,7 @@ func main() {
 	//http.HandleFunc("/", server.greeter) // TODO old remove
 	http.HandleFunc("/", server.home)
 	http.HandleFunc("/js/", server.homejs)
+	http.HandleFunc("/images/", server.images)
 	http.HandleFunc("/healthz", server.healthz)
 	http.HandleFunc("/api/v1/users/", server.testSQL)
 	http.HandleFunc("/users", server.users)
