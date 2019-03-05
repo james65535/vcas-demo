@@ -25,29 +25,29 @@ class Clock extends React.Component {
                 </header>
                 <div className="content-container">
                     <div className="content-area">
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <a href="..." class="card clickable">
-                                <div class="card-img">
-                                    <img src="/images/apple.png" />
-                                </div>
-                                <div class="card-block">
-                                    <p class="card-text">
-                                    Platform: {navigator.platform}
-                                    <br />  
-                                    UserAgent: {navigator.userAgent}
-                                    <br />
-                                    Geo: {navigator.geolocation.getCurrentPosition.name}
-                                    <br />
-                                    Platform: {navigator.platform}
-                                    <br />
-                                    Product: {navigator.product}
-                                    <br />
-                                    Vendor: {navigator.vendor}  
-                                    </p>
-                                </div>
-                            </a>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                <a href="..." class="card clickable">
+                                    <div class="card-img">
+                                        <img src="/images/apple.png" />
+                                    </div>
+                                    <div class="card-block">
+                                        <p class="card-text">
+                                            Platform: {navigator.platform}
+                                            <br />
+                                            UserAgent: {navigator.userAgent}
+                                            <br />
+                                            Geo: {navigator.geolocation.getCurrentPosition.name}
+                                            <br />
+                                            Platform: {navigator.platform}
+                                            <br />
+                                            Product: {navigator.product}
+                                            <br />
+                                            Vendor: {navigator.vendor}
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
