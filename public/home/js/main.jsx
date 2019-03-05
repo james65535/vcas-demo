@@ -88,12 +88,22 @@ function getPlatformImage() {
         case "Win32":
             $img.src = "/images/windows.png"
             break;
-       default:
+        case "Linux armv8l":
+            $img.src = "/images/android.png"
+            break;
+        default:
             $img.src = "/images/unicorn.png"
        break;
     }
-    $img.style.width = "250px"
-    $img.style.height = "250px"
+    if (document.body.clientWidth > 300 ){
+        $img.style.width = "250px"
+        $img.style.height = "250px"
+    } else
+    {
+        $img.style.width = "100px"
+        $img.style.height = "100px"
+    
+    }
     
 }
 
