@@ -13,7 +13,7 @@ class Clock extends React.Component {
                         <a _ngcontent-c0="" className="nav-link" href="/home" routerlinkactive="active"
                            ng-reflect-router-link="/home" ng-reflect-router-link-active="active"><span _ngcontent-c0=""
                                                                                                        className="nav-text">Home</span></a>
-                        <a _ngcontent-c0="" className="nav-link" href="/users" routerlinkactive="active"
+                        <a _ngcontent-c0="" className="nav-link" href="/user" routerlinkactive="active"
                            ng-reflect-router-link="/users" ng-reflect-router-link-active="active"><span _ngcontent-c0=""
                                                                                                        className="nav-text">Users</span></a>
                         <a _ngcontent-c0="" className="nav-link" href="/about" routerlinkactive="active"
