@@ -26,7 +26,7 @@ class Clock extends React.Component {
                 <div className="content-container">
                     <div className="content-area">
                         <div>
-                            <h1>Hello test</h1>
+                            <h1>Hello test!</h1>
                             <br />
                             UserAgent: {navigator.userAgent}
                             <br />
