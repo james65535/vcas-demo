@@ -29,19 +29,32 @@ class Clock extends React.Component {
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <a href="..." class="card clickable">
                                     <div class="card-img">
-                                        <img src="/images/apple.png" width="auto" height="auto"/>
+                                        <table width="250px">
+                                         <tr>
+                                             <td>
+                                                 <img id="platformimage" src="/images/unicorn.png" />
+                                             </td>
+                                         </tr>
+                                        </table>
                                     </div>
                                     <div class="card-block">
                                         <p class="card-text">
-                                            Platform: {navigator.platform}
-                                            <br />
-                                            UserAgent: {navigator.userAgent}
-                                            <br />
-                                            Platform: {navigator.platform}
-                                            <br />
-                                            Product: {navigator.product}
-                                            <br />
-                                            Vendor: {navigator.vendor}
+                                            <table class="table table-vertical">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Platform</th>
+                                                        <td>{navigator.platform}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Browser Vendor</th>    
+                                                        <td>{navigator.vendor}</td> 
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Browser Type</th>
+                                                        <td>{navigator.product}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </p>
                                     </div>
                                 </a>
@@ -59,6 +72,23 @@ function tick() {
         <Clock date={new Date()} />,
         document.getElementById('root')
     );
+    
+    getPlatformImage()
+}
+
+function getPlatformImage() {
+    var $img = document.getElementById("platformimage")
+    switch(navigator.platform) {
+        case "MacIntel":
+            $img.src = "/images/apple.png"
+            break;
+        case "Win32":
+            $img.src = "/images/windows.png"
+            break;
+       default:
+            $img.src = "/images/unicorn.png"
+       break;
+    }
 }
 
 
