@@ -62,6 +62,7 @@ class Clock extends React.Component {
                                                         <td>{navigator.appVersion}</td>
                                                     </tr>
                                                 </tbody>
+                                                
                                             </table>
                                         </p>
                                     </div>
