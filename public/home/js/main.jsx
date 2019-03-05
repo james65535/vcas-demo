@@ -29,7 +29,7 @@ class Clock extends React.Component {
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <a href="..." class="card clickable">
                                     <div class="card-img">
-                                        <table width="500px">
+                                        <table width="250px">
                                          <tr>
                                              <td>
                                                  <img id="platformimage" src="/images/unicorn.png" />
