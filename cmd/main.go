@@ -19,6 +19,7 @@ var wfProxy string
 
 type Server struct {
 	greetC metrics.Counter
+	homeC metrics.Counter
 	db *sql.DB
 }
 
@@ -71,6 +72,7 @@ func (s *Server)healthz(w http.ResponseWriter, r *http.Request) {
 
 // Temporary route to try clarity and react
 func (s *Server)home(w http.ResponseWriter, r *http.Request) {
+	s.homeC.Inc(1)
 	file := "public/home/index.html"
 	log.Println("Home File:", file)
 	http.ServeFile(w, r, file)
@@ -130,11 +132,12 @@ func (s *Server)testSQL(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	//wavefront setup
-	server := Server{metrics.NewCounter(), nil}
+	server := Server{metrics.NewCounter(), metrics.NewCounter(), nil}
 	hostTags := map[string]string{
 		"source": "j-go-metrics-test",
 	}
-	wavefront.RegisterMetric("requests", server.greetC, hostTags)
+	wavefront.RegisterMetric("health requests", server.greetC, hostTags)
+	wavefront.RegisterMetric("home requests", server.homeC, hostTags)
 	wfAddr, err := net.ResolveTCPAddr("tcp", wfProxy)
 	if err != nil {
 		fmt.Println("wf proxy resolve address error:", err)
