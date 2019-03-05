@@ -61,11 +61,8 @@ class Clock extends React.Component {
                                                         <th>Browser Version</th>
                                                         <td>{navigator.appVersion}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>Geo</th>
-                                                        <td>{navigator.geolocation.getCurrentPosition.toString()}</td>
-                                                    </tr>
                                                 </tbody>
+                                                
                                             </table>
                                         </p>
                                     </div>
@@ -101,6 +98,9 @@ function getPlatformImage() {
             $img.src = "/images/unicorn.png"
        break;
     }
+    $img.style.width = "250px"
+    $img.style.height = "250px"
+    
 }
 
 
