@@ -35,7 +35,7 @@ class Clock extends React.Component {
                                         <p class="card-text">
                                             Platform: {navigator.platform}
                                             <br />
-                                            User Agent: {navigator.userAgent}
+                                            User-Agent: {navigator.userAgent}
                                             <br />
                                             Geo: {navigator.geolocation}
                                             <br />
