@@ -106,6 +106,7 @@ function getPlatformImage() {
         $img.style.width = "100px"
         $img.style.height = "100px"
     }
+    
     $img.align = "middle"    
 }
 
