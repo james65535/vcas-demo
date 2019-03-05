@@ -25,20 +25,39 @@ class Clock extends React.Component {
                 </header>
                 <div className="content-container">
                     <div className="content-area">
-                        <div>
-                            <h1>Hello test!</h1>
-                            <br />
-                            UserAgent: {navigator.userAgent}
-                            <br />
-                            Geo: {navigator.geolocation.getCurrentPosition.name}
-                            <br />
-                            Platform: {navigator.platform}
-                            <br />
-                            Product: {navigator.product}
-                            <br />
-                            Vendor: {navigator.vendor}
-                            <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card-img">
+                                    <img src="https://uz.wikipedia.org/wiki/Apple_Inc.#/media/File:Apple_logo_black.svg" alt="..." />
+                                </div>
+                                <div class="card-block">
+                                    <p class="card-text">
+                                        Platform: {navigator.platform}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card-img">
+                                    <img src="https://uz.wikipedia.org/wiki/Apple_Inc.#/media/File:Apple_logo_black.svg" alt="..." />
+                                </div>
+                                <div class="card-block">
+                                    <p class="card-text">
+                                    <br />
+                                    UserAgent: {navigator.userAgent}
+                                    <br />
+                                    Geo: {navigator.geolocation.getCurrentPosition.name}
+                                    <br />
+                                    Platform: {navigator.platform}
+                                    <br />
+                                    Product: {navigator.product}
+                                    <br />
+                                    Vendor: {navigator.vendor}                                    </p>
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
