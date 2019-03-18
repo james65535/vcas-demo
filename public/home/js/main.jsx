@@ -40,35 +40,4 @@ function tick() {
 
 }
 
-function getPlatformImage() {
-    var $img = document.getElementById("platformimage")
-    switch(navigator.platform) {
-        case "MacIntel":
-            $img.src = "/images/apple.png"
-            break;
-        case "Win32":
-            $img.src = "/images/windows.png"
-            break;
-        case "Linux armv8l":
-            $img.src = "/images/android.png"
-            break;
-        case "iPhone":
-            $img.src = "/images/ios.png"
-            break;
-        default:
-            $img.src = "/images/unicorn.png"
-            break;
-    }
-    if (document.body.clientWidth > 300 ){
-        $img.style.width = "250px"
-        $img.style.height = "250px"
-    } else {
-        $img.style.width = "100px"
-        $img.style.height = "100px"
-    }
-
-    $img.align = "middle"
-}
-
-
 setInterval(tick, 1000);
