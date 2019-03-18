@@ -25,44 +25,6 @@ class Clock extends React.Component {
                 </header>
                 <div className="content-container">
                     <div className="content-area">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                <a href="..." class="card clickable">
-                                    <div class="card-img">
-                                        <img id="platformimage" src="/images/unicorn.png" />
-                                    </div>
-                                    <div class="card-block">
-                                        <p class="card-text">
-                                            <table class="table table-vertical">
-                                                <tbody>
-                                                <tr>
-                                                    <th>Platform</th>
-                                                    <td>{navigator.platform}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Browser Vendor</th>
-                                                    <td>{navigator.vendor}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Browser Type</th>
-                                                    <td>{navigator.product}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Browser Name</th>
-                                                    <td>{navigator.appName}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Browser Version</th>
-                                                    <td>{navigator.appVersion}</td>
-                                                </tr>
-                                                </tbody>
-
-                                            </table>
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
