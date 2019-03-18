@@ -76,7 +76,6 @@ function tick() {
         document.getElementById('root')
     );
 
-
 }
 
 function getPlatformImage() {
