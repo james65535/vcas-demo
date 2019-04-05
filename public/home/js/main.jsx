@@ -24,6 +24,7 @@ class Clock extends React.Component {
                     </div>
                 </header>
                 <div className="content-container">
+
                     <div className="content-area">
                     </div>
                 </div>
