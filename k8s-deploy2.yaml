@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: vcas-demo
-        image: james65535/vcas-demo:v24
+        image: james65535/vcas-demo:${input.GIT_COMMIT_ID}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
