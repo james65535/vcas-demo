@@ -6,13 +6,13 @@ import (
 	"fmt"
 	_ "github.com/lib/pq"
 	"github.com/rcrowley/go-metrics"
-	"github.com/wavefronthq/go-metrics-wavefront"
+	"github.com/wavefronthq/go-metrics-wavefront/reporting"
+	"github.com/wavefronthq/wavefront-sdk-go/application"
+	wavefront "github.com/wavefronthq/wavefront-sdk-go/senders"
 	"log"
-	"net"
 	"net/http"
 	"os"
 	"regexp"
-	"time"
 )
 
 var wfProxy string
@@ -34,6 +34,7 @@ func init() {
 	// Configure Wavefront proxy address
 	if os.Getenv("WF_PROXY") != "" {
 		wfProxy = os.Getenv("WF_PROXY")
+		log.Println("WFProxy:", wfProxy)
 	} else {
 		log.Println("No Wavefront Proxy Address Specified")
 	}
@@ -132,17 +133,46 @@ func (s *Server)testSQL(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	//wavefront setup
+	proxyCfg := &wavefront.ProxyConfiguration {
+		Host : wfProxy,
+
+		// At least one port should be set below.
+		MetricsPort : 8082,      // set this (typically 2878) to send metrics
+		DistributionPort: 8082,  // set this (typically 2878) to send distributions
+		TracingPort : 30000,     // set this to send tracing spans
+
+		FlushIntervalSeconds: 10, // flush the buffer periodically, defaults to 5 seconds.
+	}
+	sender, errSender := wavefront.NewProxySender(proxyCfg)
+	if errSender != nil {
+		panic("error:" + errSender.Error())
+	}
+	_ = reporting.NewReporter(
+		sender,
+		application.New("app", "srv"),
+		reporting.Source("j-go-metrics-test"),
+		reporting.Prefix("jsome.jprefix"),
+		reporting.LogErrors(true),
+	)
+
+	// Create monitoring metrics
 	server := Server{metrics.NewCounter(), metrics.NewCounter(), nil}
-	hostTags := map[string]string{
-		"source": "j-go-metrics-test",
+
+	errHealthz := metrics.Register("healthz.requests", server.greetC)
+	if errHealthz != nil {
+		fmt.Println("Healthz register metric error: ", errHealthz)
 	}
-	wavefront.RegisterMetric("health requests", server.greetC, hostTags)
-	wavefront.RegisterMetric("home requests", server.homeC, hostTags)
-	wfAddr, err := net.ResolveTCPAddr("tcp", wfProxy)
-	if err != nil {
-		fmt.Println("wf proxy resolve address error:", err)
+
+	errHGreetC :=  metrics.Register("home.requests", server.homeC)
+	if errHGreetC != nil {
+		fmt.Println("Greetc register metric error: ", errHGreetC)
 	}
-	go wavefront.WavefrontProxy(metrics.DefaultRegistry, 1*time.Minute, hostTags, "some.prefix", wfAddr)
+
+	// Verify metrics are in registry
+	metrics.DefaultRegistry.Each(func(key string, metric interface{}) {
+		log.Println("metric:", key)
+	})
+
 
 	// Connect to PSQL Database
 	/*
