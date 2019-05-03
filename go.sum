@@ -1,0 +1,13 @@
+github.com/caio/go-tdigest v2.3.0+incompatible h1:zP6nR0nTSUzlSqqr7F/LhslPlSZX/fZeGmgmwj2cxxY=
+github.com/caio/go-tdigest v2.3.0+incompatible/go.mod h1:sHQM/ubZStBUmF1WbB8FAm8q9GjDajLC5T7ydxE3JHI=
+github.com/lib/pq v1.1.0 h1:/5u4a+KGJptBRqGzPvYQL9p0d/tPR4S31+Tnzj9lEO4=
+github.com/lib/pq v1.1.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a h1:9ZKAASQSHhDYGoxY8uLVpewe1GDZ2vu2Tr/vTdVAkFQ=
+github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a/go.mod h1:bCqnVzQkZxMG4s8nGwiZ5l3QUCyqpo9Y+/ZMZ9VjZe4=
+github.com/wavefrontHQ/go-metrics-wavefront v0.9.0 h1:DBj656apE4IH8S9Hvp3DGXZBBMaVoXenDMkikXkKLJI=
+github.com/wavefrontHQ/go-metrics-wavefront v0.9.0/go.mod h1:5nUOqBHWQSKs/5884Au00NYW+ZZ9NDA0qOYEKq2wjqI=
+github.com/wavefronthq/go-metrics-wavefront v0.9.0 h1:CoHS23gt3FZsjSerhqmNxpfMIFQaNM+WPxU/jB/KmRQ=
+github.com/wavefronthq/go-metrics-wavefront v0.9.1-0.20190415173204-e86b11d2e81b h1:fYqeM9WhqEGc3TzFw2w0asGtuLfjsFxNOaGDgiEh5UM=
+github.com/wavefronthq/go-metrics-wavefront v0.9.1-0.20190415173204-e86b11d2e81b/go.mod h1:aU/q29aSlzqqUkNHiK0Ddi6Rmtfw1lcLrxKb2VGLiMA=
+github.com/wavefronthq/wavefront-sdk-go v0.9.2 h1:/LvWgZYNjHFUg+ZUX+qv+7e+M8sEMi0lM15zPp681Gk=
+github.com/wavefronthq/wavefront-sdk-go v0.9.2/go.mod h1:hQI6y8M9OtTCtc0xdwh+dCER4osxXdEAeCpacjpDZEU=
