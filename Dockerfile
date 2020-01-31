@@ -1,12 +1,6 @@
-FROM golang:1.12 AS build-env
-COPY . /go/src/app
-WORKDIR /go/src/app
-#RUN go install -i
-RUN CGO_ENABLED=0 GOOS=linux go build -a -o main /go/src/app/cmd/main.go
-
 FROM scratch
-# WORKDIR /app
-COPY --from=build-env /go/src/app/main main
-COPY public public
-CMD ["/main"]
+WORKDIR /go/src/app
+ADD cmd/main /go/src/app
+ADD public /go/src/app
+ENTRYPOINT ["/go/src/app/main"]
 EXPOSE 8080

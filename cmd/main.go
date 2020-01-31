@@ -137,8 +137,8 @@ func main() {
 		Host : wfProxy,
 
 		// At least one port should be set below.
-		MetricsPort : 8082,      // set this (typically 2878) to send metrics
-		DistributionPort: 8082,  // set this (typically 2878) to send distributions
+		MetricsPort : 2878,      // set this (typically 2878) to send metrics
+		DistributionPort: 2878,  // set this (typically 2878) to send distributions
 		TracingPort : 30000,     // set this to send tracing spans
 
 		FlushIntervalSeconds: 10, // flush the buffer periodically, defaults to 5 seconds.
